@@ -131,7 +131,7 @@ GitOps 저장소는:
 
 ```
 project/
-├── basic_infra/          # Terraform 인프라 (EKS 클러스터)
+├── infra/          # Terraform 인프라 (EKS 클러스터)
 ├── eks-app/              # ✅ CI 트리거
 │   ├── demo/             # Spring Boot 애플리케이션
 │   └── .github/workflows/ci.yaml (Reusable Workflow 호출)
