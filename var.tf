@@ -28,10 +28,6 @@ variable "MyInstanceType" {
   description = "EC2 instance type."
   type        = string
   default     = "t3.medium"
-  validation {
-    condition     = contains(["t2.micro", "t2.small", "t2.medium", "t3.micro", "t3.small", "t3.medium"], var.MyInstanceType)
-    error_message = "Invalid instance type. Valid options are t2.micro, t2.small, t2.medium, t3.micro, t3.small, t3.medium."
-  }
 }
 
 variable "ClusterBaseName" {
@@ -49,7 +45,7 @@ variable "KubernetesVersion" {
 variable "WorkerNodeInstanceType" {
   description = "EC2 instance type for the worker nodes."
   type        = string
-  default     = "t3.medium"
+  default     = "t3.large"
 }
 
 variable "WorkerNodeCount" {
@@ -94,8 +90,12 @@ variable "private_subnet_blocks" {
   default     = ["192.168.11.0/24", "192.168.12.0/24", "192.168.13.0/24"]
 }
 
-variable "ecr_repo" { 
-  description = "ECR 저장소 이름 (Docker 이미지 저장용)"
-  type        = string
-  default     = "demo-app" 
+variable "ecr_repos" { 
+  description = "ECR 저장소 이름 목록 (Docker 이미지 저장용)"
+  type        = set(string)
+  default     = [
+    "demo-app",
+    "kafka-producer",
+    "kafka-consumer"
+  ]
 }

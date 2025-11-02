@@ -61,7 +61,8 @@ resource "aws_iam_role_policy" "github_actions_ecr_policy" {
           "ecr:CompleteLayerUpload",
           "ecr:PutImage"
         ]
-        Resource = aws_ecr_repository.app.arn
+        # 모든 ECR 저장소에 대한 권한 부여 (demo-app, kafka-producer, kafka-consumer)
+        Resource = [for repo in aws_ecr_repository.apps : repo.arn]
       }
     ]
   })
